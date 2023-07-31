@@ -20,7 +20,7 @@ def summa(message):
         bot.send_message(message.chat.id, 'Неверный формат. Впишите сумму:')
         bot.register_next_step_handler(message, summa)
         return
-    if amount >0:
+    if 0 < amount < 100000:
         markup = types.InlineKeyboardMarkup(row_width=3)
         button1 = types.InlineKeyboardButton('USD/EUR', callback_data='usd/eur')
         button2 = types.InlineKeyboardButton('USD/PLN', callback_data='usd/pln')
@@ -31,7 +31,7 @@ def summa(message):
         markup.add(button1, button2, button3, button4, button5, button6)
         bot.send_message(message.chat.id, 'Выберите пару валют:', reply_markup=markup)
     else:
-        bot.send_message(message.chat.id, 'Число должно быть больше 0. Впишите сумму:')
+        bot.send_message(message.chat.id, 'Число должно быть больше 0 и содержать не более 5 символов. Впишите сумму:')
         bot.register_next_step_handler(message, summa)
 
 @bot.message_handler(content_types=['text'])
